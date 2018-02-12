@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Hello Codi</title>
+        <style type="text/css">/* CSS Stuff*/
+        /* Refrences the Div to align it's contents to center */
+            #button {
+                text-align: center;
+            }
+        
+        </style>
+    </head>
+    
+   <body><!--HTML Stuff-->
+       <!--Div is refrenced in CSS -->
+       <div id="button">
+            <h1>Click Me to Play a Really Annoying Sound</h1>
+           <!--Creates the button as the image and defines what to do when the button is clicked or double clicked --> 
+           <button onclick="playAudio()" ondblclick="pauseAudio()" type="button"><img src="./codi.jpg" width="500" length="500"></button>
+           
+        </div>
+        
+       <!--To get the audio file onto the page -->
+       <audio id="Sound">
+            <source src="Bee-Sound.mp3" type="audio/mpeg">
+           <!--Will only display if audio format isn't compatable with the browser --> 
+           Your Browser Doesn't Support the Audio Element ;/
+        </audio>
+       
+        <script>//Java Script    
+        //Define the value of x
+        var x = document.getElementById("Sound");
+            
+        //Start Playing the audio
+        function playAudio() { 
+        x.play(); 
+        } 
+        //Pause the audio
+        function pauseAudio() { 
+        x.pause(); 
+         }
+         
+        </script>
+    </body>
+    
+</html>
