@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Magic 8 Ball</title>
+        <style type="text/css">
+        #button {
+            text-align:center;
+        }
+        </style>
+    </head>
+    
+    <body>
+        <div id="button">
+            <button type="button" onclick="playAudio"><img src="./8ball.jpg" width="500" length="500"></button>
+            <h1>Click to See the Future</h1>
+        </div>
+        <div id="Future">Your Future</div>
+        <audio id="sound">
+        <source src="Tada.mp3" type="audio/mpeg">
+        </audio>
+        <script>
+        var x = document.getElementById("sound")
+        
+        function playAudio() {
+        x.play();
+        }
+        
+        var element = document.getElementById("Future").innerHTML;
+        element.innerHTML = "Penis";
+        </script>
+    
+    
+    </body>
+
+</html>
