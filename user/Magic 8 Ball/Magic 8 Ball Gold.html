@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Magic 8 Ball</title>
+        <style type="text/css">
+        #textBox, #button,#textEntry,h1 {
+            text-align:center;
+        }
+        </style>
+    </head>
+    
+    <body>
+        <div id="button">
+            <button onclick="ChooseReply()" type="button" ><img src="./MAGIC8BALL.gif" width="500" length="500"></button>
+        </div>
+            <h1 id="future">Ask your question<br>
+                Click to See the Future</h1>
+        
+        <div id="textBox">
+            <form>
+                <input id="textEntry" type="text" name="question">            
+            </form>
+        </div>
+        
+        <audio id="sound">
+        <source src="Tada.mp3" type="audio/mpeg">
+        </audio>
+       
+        <script>
+        
+            var x = document.getElementById("sound")
+            var Future = document.getElementById("future");
+        
+            function ChooseReply() {
+            var z = Math.floor(Math.random() * 10);
+            var replys = ["You will die when you look away from this screen", 
+                          "You will be Rich",
+                          "You will live a long happy life",
+                          "You will die alone",
+                          "Jesus loves you", 
+                          "HA sike you dont get a reading",
+                          "Okay",
+                          "YE MATE ITS THE BIG LEZ", 
+                          "cool",
+                          "How about no"];
+            Future.innerHTML = replys [z];
+            //x.play();               
+            }
+            
+            var t = document.getElementById("textEntry").value;
+            var w = ["Death",
+                     "Love",
+                     "When",
+                     "How",
+                     "Who",
+                     "Money",
+                     "Will you",
+                     "What",
+                     "Will you marry me",
+                     "Do you love me",
+            ]
+            
+            
+        </script>
+
+    
+    </body>
+
+</html>

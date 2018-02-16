@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Magic 8 Ball</title>
+        <style type="text/css">
+        #button,h1 {
+            text-align:center;
+        }
+        </style>
+    </head>
+    
+    <body>
+        <div id="button">
+            <button onclick="ChooseReply()" type="button" ><img src="./MAGIC8BALL.gif" width="500" length="500"></button>
+        </div>
+            <h1 id="future">Click to See the Future</h1>
+        
+        <audio id="sound">
+        <source src="Tada.mp3" type="audio/mpeg">
+        </audio>
+       
+        <script>
+        
+            var x = document.getElementById("sound")
+            var Future = document.getElementById("future");
+        
+            function ChooseReply() {
+                /*var y = Math.floor(Math.random() * 10);
+                if (y == 1){
+                    Future.innerHTML = "You will die when you look away from this screen";
+                }if (y == 2){
+                    Future.innerHTML = "You will be Rich";
+                }if (y == 3){
+                    Future.innerHTML = "You will live a long happy life";
+                }if (y == 4){
+                    Future.innerHTML = "You will die alone";
+                }if (y == 5){
+                    Future.innerHTML = "Jesus loves you"       
+                }if (y == 6){
+                    Future.innerHTML = "HA sike you dont get a reading"       
+                }if (y == 7){
+                    Future.innerHTML = "Okay"
+                }if (y == 8){
+                    Future.innerHTML = "Cool"      
+                }if (y == 9){
+                    Future.innerHTML = "YE MATE ITS THE BIG LEZ"       
+                }
+                
+                x.play();*/
+                
+            
+            var z = Math.floor(Math.random() * 10);
+            var replys = ["You will die when you look away from this screen", 
+                          "You will be Rich",
+                          "You will live a long happy life",
+                          "You will die alone",
+                          "Jesus loves you", 
+                          "HA sike you dont get a reading",
+                          "Okay",
+                          "YE MATE ITS THE BIG LEZ", 
+                          "cool",
+                          "How about no"];
+            Future.innerHTML = replys [z];
+            x.play();               
+            }
+            
+        </script>
+
+    
+    </body>
+
+</html>
