@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+    Author: Panagioti Fatouros
+    Date: 01 March 2018
+
+    -->
+    <title>Adventures of Stickman</title>
+    <!---<link rel="stylesheet" href="./CSS code.css>-->
+  <style type="text/css">
+    body{
+      font-family:monospace;
+      background-image: url(background.jpg);
+    }
+    
+    
+    #playingScreen {  
+      border-style: solid;
+      border-width: thick;
+      width: 40%;
+      height: 35%;
+      text-align: center;
+      background-color: white;
+      position: absolute;
+      top: 32.5%;
+      left: 30%;
+      
+
+    }
+    #stickmanDiv {
+      bottom: 5px;
+      position: absolute;
+      left: 5px;
+    }
+   #nextButton {
+      bottom: 2px;
+      position: absolute;
+      right:2px;
+    }
+    
+    #objective, #obsticle {
+      position: absolute;
+      bottom: 2px;
+      right: 100px;
+      left: ;
+      display: none;
+    }
+  </style>                               
+
+  </head>  
+  
+  <body>
+
+      <div id="playingScreen">
+        <div id="stickmanDiv">
+          <img src="./stickman-still-jump.jpg" id="stickman" width="40" height="80">
+        </div>
+        <h2 id="text">Welcome To the Adventures of Stickman, Click to start the tutoral</h2>
+        <button id="nextButton"><img src="nextArrow.jpg" width="40" height="40"></button>
+        <img src="obsticle.gif" id="obsticle" height="40" width="40">
+        <img src="./objective.jpg" id="objective" height="100" width="40">
+      </div>
+      
+
+    
+    <script>
+    
+      var stickman = document.getElementById("stickman");
+      var obsticle = document.getElementById("obsticle");
+      var objective = document.getElementById("objective");
+      var stickmanDiv = document.getElementById("stickmanDiv");
+      var stickmanLeftRightDistance = 5;
+      var obsticleMovement = 0;
+      var numberOfKeyDowns = 0;
+      var numberOfButtonClicks = -1;
+      var instructionText = document.getElementById("text");
+      var nextButton = document.getElementById("nextButton");
+      var jump = 38;
+      var duck= 40;
+      var left= 37;
+      var right= 39;
+      var spacebar = 32;
+      var button= document.getElementById('nextButton');
+      var timer;
+      var moveTimer;
+      var isStationary = true;
+      var keysDown=[];
+      var textInstruction = 
+      ["Press the Arrow Keys to Run, Jump and Duck",
+       "Great Job! Click Next to continue the tutorial -->",
+       "Lets try something harder! Jump over the knife!",
+       "Great Job! Now lets get to an Objective -->",
+       "Run to the objective!",
+       "Duck under the knife!",
+        "You're ready to play ;)",
+       "LEVEL 1",
+       "New addtions coming soon ;)",
+      ];
+      
+
+//revert to original settings
+    function keyUpCheck(event){
+      kC= event.keyCode;
+      if (keysDown.indexOf(kC)>-1) keysDown.splice(keysDown.indexOf(kC),1); //remove key value from array
+      stickmanDiv.style.bottom = "5px";
+      stickman.height="80";
+      stickman.width="40";
+      numberOfKeyDowns=-1;
+      if (keysDown.length==0) {
+        clearInterval(moveTimer);
+        isStationary = true;
+        stickman.src = "./stickman-still-jump.jpg"
+      } else {
+        changeImage();
+      }
+        
+    }
+    
+      
+      //use to disregard repeat key down events when changing gifs
+     function keyDownCheck(event){
+       kC= event.keyCode;
+       if ((kC==jump)||(kC==duck)||(kC==left)||(kC==right)){
+        ++numberOfKeyDowns;
+
+        if (keysDown.indexOf(kC)==-1)  {  //new key down
+          numberOfKeyDowns =- 1
+          keysDown.push(kC);
+        }
+        if(numberOfKeyDowns == 1){
+          changeImage();
+        }
+        if (isStationary) {
+          moveTimer=setInterval (movementStickman,"50");
+          isStationary = false;
+        }
+      }
+     }
+     
+    function buttonClicks() {
+      ++numberOfButtonClicks;
+      if (numberOfButtonClicks<textInstruction.length)
+      instructionText.innerHTML = textInstruction [numberOfButtonClicks]; 
+      movementObsticleObjectiveControl();
+    };
+
+    //movement of stickman
+    function movementStickman (){
+      if(keysDown.indexOf(jump)>-1){
+        stickmanDiv.style.bottom = "40px";
+      }
+      if(keysDown.indexOf(duck)>-1){
+        stickmanDiv.style.bottom="0px";
+      }
+      if ((keysDown.indexOf(left)>-1) && (keysDown.indexOf(right)==-1)){  // left key and not right key
+        --stickmanLeftRightDistance;
+        --stickmanLeftRightDistance;
+      }
+      if ((keysDown.indexOf(right)>-1) && (keysDown.indexOf(left)==-1)){  // left key and not right key
+        ++stickmanLeftRightDistance;
+        ++stickmanLeftRightDistance;
+      }
+
+      stickmanDiv.style.left = stickmanLeftRightDistance+"px";
+     };
+      
+      
+      //change gifs and images
+    function changeImage(){
+      if ((keysDown.indexOf(left)>-1) && (keysDown.indexOf(right)==-1)){  // left key and not right key
+        stickman.src = "./stickman-left.gif"; 
+        stickman.height="80";
+        stickman.width="40";
+      }
+      if ((keysDown.indexOf(right)>-1) && (keysDown.indexOf(left)==-1)){  // left key and not right key
+        stickman.src = "./stickman-right.gif";
+        stickman.height="80";
+        stickman.width="40"; 
+      }
+      if ((keysDown.indexOf(right)>-1) && (keysDown.indexOf(left)>-1)){  // left key and not right key
+        stickman.src = "./stickman-still-jump.jpg";
+        stickman.height="80";
+        stickman.width="40"; 
+      }
+      if(keysDown.indexOf(jump)>-1){
+        stickman.height="80";
+        stickman.width="40";
+      }
+      if(keysDown.indexOf(duck)>-1){
+        stickman.src= "./stickman-duck.jpg";
+        stickman.height="40";
+        stickman.width="80";
+      }
+      if ((keysDown.indexOf(jump)>-1) && (keysDown.indexOf(duck)>-1)){  // left key and not right key
+        stickman.src = "./stickman-still-jump.jpg";
+        stickman.height="80";
+        stickman.width="40"; 
+      }
+    }
+      
+      
+      function movementObsticleObjectiveControl(){
+        if(numberOfButtonClicks == 1){
+          stickmanDiv.style.left= "5px";
+          stickmanLeftRightDistance= 0;
+        }
+        if(numberOfButtonClicks == 2){
+          timer= setInterval(movementObsticle, "10");
+        }
+         if(numberOfButtonClicks == 3){
+          obsticle.style.display = "none";
+          obsticle.style.right= "100px";
+          obsticleMovement= 0;
+          stickmanLeftRightDistance= 0;
+          clearInterval(timer);
+        }
+        if(numberOfButtonClicks == 4){
+          objective.style.display= "block";
+        }
+        if(numberOfButtonClicks == 5){
+          timer= setInterval(movementObsticle, "10");
+          stickmanDiv.style.left="5px";
+          objective.style.display= "none";
+          obsticle.style.dispay= "block";
+          obsticle.style.bottom= "60px";
+          stickmanLeftRightDistance= 0;
+        }
+        if(numberOfButtonClicks>5){
+          clearInterval(timer);
+        }
+      }
+      
+      function movementObsticle(){
+        ++obsticleMovement
+        obsticle.style.right = obsticleMovement+"px";
+        obsticle.style.display = "block";
+      }
+      
+    
+      
+    addEventListener("keydown", keyDownCheck);
+    addEventListener("keyup", keyUpCheck);
+    nextButton.addEventListener("click", buttonClicks);  
+
+
+
+    </script>
+    
+
+  
+  
+  
+  </body>
+
+</html>
